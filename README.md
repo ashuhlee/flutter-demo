@@ -1,6 +1,6 @@
-# todo_app
+# Demo
 
-A new Flutter project.
+Flutter demo project using Supabase for database management.
 
 ## Getting Started
 
