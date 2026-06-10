@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'package:todo_app/note_page.dart';
+import 'package:todo_app/views/note_page.dart';
 import 'package:todo_app/constants/colors.dart';
 
 Future<void> main() async {
@@ -24,7 +24,7 @@ class TodoApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: ThemeColor.fuchsia.shade50
+        scaffoldBackgroundColor: ThemeColor.fuchsia.shade50,
       ),
       home: NotePage(),
     );

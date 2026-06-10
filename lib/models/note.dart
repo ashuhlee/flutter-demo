@@ -1,6 +1,4 @@
 
-import 'package:intl/intl.dart';
-
 class Note {
   int? id;
   String content;
