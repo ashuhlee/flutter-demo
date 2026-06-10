@@ -20,6 +20,7 @@ class NoteDatabase {
   Future updateNote(Note oldNote, String newContent) async {
     await database.update({
       'content': newContent,
+      'updated_at': DateTime.now().toUtc().toIso8601String(),
     }).eq('id', oldNote.id!);
   }
 

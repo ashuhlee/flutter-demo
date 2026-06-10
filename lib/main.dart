@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'package:todo_app/note_page.dart';
+import 'package:todo_app/constants/colors.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -19,8 +21,11 @@ class TodoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: ThemeColor.fuchsia.shade50
+      ),
       home: NotePage(),
     );
   }
