@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:todo_app/services/note_database.dart';
 import 'package:todo_app/models/note.dart';
-import 'package:todo_app/constants/colors.dart';
+import 'package:todo_app/theme/colors.dart';
 import 'package:todo_app/widgets/app_bar.dart';
 import 'package:todo_app/widgets/create_note_btn.dart';
 import 'package:todo_app/widgets/delete_note_dialog.dart';
@@ -18,65 +19,79 @@ class NotePage extends StatefulWidget {
 
 class _NotePageState extends State<NotePage> {
   // notes database + text controllers
-  final notesDatabase = NoteDatabase();
+  final database = NoteDatabase();
   final noteController = TextEditingController();
   final searchController = TextEditingController();
 
-  void addNewNote() {
+  List<Note> _notes = [];
+
+  void _addNewNote() {
+    HapticFeedback.lightImpact();
     showDialog(
       context: context,
       builder: (context) => NoteFormDialog(
         title: 'New Note',
         controller: noteController,
-        onSave: () {
+        onSave: () async {
           final newNote = Note(
             content: noteController.text,
             createdAt: '',
             updatedAt: null,
           );
-          notesDatabase.createNote(newNote);
+
           Navigator.pop(context);
           noteController.clear();
+          await database.createNote(newNote);
         },
       ),
     );
   }
 
-  void updateNote(Note note) {
-    noteController.text =
-        note.content; // prefill text controller w existing note
-
+  void _updateNote(Note note) {
+    noteController.text = note.content; // prefill text controller w existing note
+    HapticFeedback.lightImpact();
     showDialog(
       context: context,
       builder: (context) => NoteFormDialog(
         title: 'Update Note',
         controller: noteController,
-        onSave: () {
-          notesDatabase.updateNote(note, noteController.text);
+        onSave: () async {
+          final updatedNote = noteController.text;
+
           Navigator.pop(context);
           noteController.clear();
+          await database.updateNote(note, updatedNote);
         },
       ),
     );
   }
 
-  void deleteNote(Note note) {
+  void _deleteNote(Note note) {
+    HapticFeedback.mediumImpact();
     showDialog(
       context: context,
       builder: (context) => DeleteFormDialog(
-        onDelete: () {
-          notesDatabase.deleteNote(note);
+        onDelete: () async {
           Navigator.pop(context);
+          await database.deleteNote(note);
         },
       ),
     );
   }
 
-  List<Note> filterNotes(List<Note> notes) {
+  void _reorderNotes(int oldIndex, int newIndex) {
+    setState(() {
+      final note = _notes.removeAt(oldIndex);
+      _notes.insert(newIndex, note);
+    });
+    database.updateOrder(_notes);
+  }
+
+  List<Note> _filterNotes(List<Note> notes) {
     final query = searchController.text.toLowerCase();
     return notes
-        .where((note) => note.content.toLowerCase().contains(query))
-        .toList();
+      .where((note) => note.content.toLowerCase().contains(query))
+      .toList();
   }
 
   @override
@@ -86,29 +101,39 @@ class _NotePageState extends State<NotePage> {
     super.dispose();
   }
 
-  Widget buildLoadedNotes(List<Note> allNotes) {
-    final notes = filterNotes(allNotes);
+  Widget _buildLoadedNotes(List<Note> allNotes) {
+    _notes = allNotes;
+    final notes = _filterNotes(_notes);
 
     return Scaffold(
       appBar: NoteAppBar(
-        noteCount: allNotes.length,
+        noteCount: notes.length,
         searchController: searchController,
         onSearchChanged: ((value) {
           setState(() {});
         }),
       ),
-      floatingActionButton: CreateNoteButton(onPressed: addNewNote),
-      body: NoteList(notes: notes, onEdit: updateNote, onDelete: deleteNote),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 10, right: 7),
+        child: CreateNoteButton(onPressed: _addNewNote),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
+      body: NoteList(
+        notes: notes,
+        onEdit: _updateNote,
+        onDelete: _deleteNote,
+        onReorder: _reorderNotes
+      )
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: notesDatabase.stream,
+      stream: database.stream,
       builder: (context, snapshot) {
-        // loading
-        if (!snapshot.hasData) {
+        if (!snapshot.hasData) { // loading
           return Scaffold(
             body: Center(
               child: CircularProgressIndicator(
@@ -118,7 +143,7 @@ class _NotePageState extends State<NotePage> {
           );
         }
         final allNotes = snapshot.data!; // loaded
-        return buildLoadedNotes(allNotes);
+        return _buildLoadedNotes(allNotes);
       },
     );
   }
