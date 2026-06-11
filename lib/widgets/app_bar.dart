@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/constants/colors.dart';
+import 'package:todo_app/theme/colors.dart';
 import 'package:todo_app/widgets/search_field.dart';
 
 class NoteAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -22,24 +22,25 @@ class NoteAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: ThemeColor.fuchsia.shade50,
       centerTitle: false,
+      titleSpacing: 30,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Notes',
-            style: TextStyle(fontSize: 24, color: Color(0xFF363650)),
+            style: TextStyle(fontSize: 28, color: Color(0xFF363650)),
           ),
           Text(
-            '$noteCount entries',
+            noteCount == 1 ? '$noteCount entry' : '$noteCount entries',
             style: TextStyle(fontSize: 16, color: ThemeColor.fuchsia.shade800),
           ),
         ],
       ),
 
-      bottom: PreferredSize(
+      bottom: PreferredSize( // search field
         preferredSize: Size.fromHeight(70),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: NoteSearchField(
             controller: searchController,
             onChanged: onSearchChanged,

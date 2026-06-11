@@ -3,7 +3,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:change_case/change_case.dart';
 
 import 'package:todo_app/models/note.dart';
-import 'package:todo_app/constants/colors.dart';
+import 'package:todo_app/theme/colors.dart';
 import 'package:todo_app/utils/date_formatter.dart';
 
 class NoteCard extends StatelessWidget {
@@ -23,13 +23,13 @@ class NoteCard extends StatelessWidget {
     final wasEdited = note.updatedAt != null;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       padding: EdgeInsets.all(4),
-
       decoration: BoxDecoration(
+
         color: Color(0xFFFDFCFF),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: ThemeColor.fuchsia.shade100, width: 1.5),
+
         boxShadow: [
           BoxShadow(
             color: ThemeColor.fuchsia.shade500.withValues(alpha: 0.1),
@@ -43,14 +43,14 @@ class NoteCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: Text(
+            title: Text( // note title
               note.content,
               style: TextStyle(
                 color: Color(0xFF363650),
                 fontWeight: FontWeight.w400,
               ),
             ),
-            subtitle: Row(
+            subtitle: Row( // date and time
               children: [
                 Icon(
                   wasEdited ? TablerIcons.heart_exclamation : TablerIcons.heart,
@@ -66,10 +66,10 @@ class NoteCard extends StatelessWidget {
                 ),
               ],
             ),
-            trailing: Row(
+            trailing: Row( // right icons
               mainAxisSize: MainAxisSize.min,
               children: [
-                IconButton(
+                IconButton( // edit button
                   onPressed: onEdit,
                   padding: EdgeInsets.zero,
                   visualDensity: VisualDensity.compact,
@@ -87,7 +87,7 @@ class NoteCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 8),
-                IconButton(
+                IconButton( // delete button
                   onPressed: onDelete,
                   padding: EdgeInsets.zero,
                   visualDensity: VisualDensity.compact,
