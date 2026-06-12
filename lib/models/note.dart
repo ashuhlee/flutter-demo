@@ -20,7 +20,7 @@ class Note {
       content: map['content'] as String,
       createdAt: map['created_at'] as String,
       updatedAt: map['updated_at'] as String?,
-      order: map['order'] as int ?? 0
+      order: map['order'] as int
     );
   }
   // note to map

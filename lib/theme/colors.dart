@@ -5,7 +5,7 @@ class ThemeColor {
   static const MaterialColor fuchsia = MaterialColor(
     0xFFFFBAE2, // base color
     {
-      50:  Color(0xFFFFF5FC),
+      50:  Color(0xFFFFEEFB),
       100: Color(0xFFEFE9ED),
       200: Color(0xFFFFDDF1),
       300: Color(0xFFFFD6EE),

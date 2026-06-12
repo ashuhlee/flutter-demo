@@ -4,8 +4,9 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:todo_app/models/note.dart';
-import 'package:todo_app/widgets/note_card.dart';
+import '../models/note.dart';
+import '../widgets/note_card.dart';
+import '../widgets/empty_state.dart';
 import '../theme/colors.dart';
 
 class NoteList extends StatelessWidget {
@@ -14,16 +15,33 @@ class NoteList extends StatelessWidget {
     required this.notes,
     required this.onEdit,
     required this.onDelete,
-    required this.onReorder
+    required this.onReorder,
+    required this.isSearching
   });
 
   final List<Note> notes;
   final void Function(Note note) onEdit;
   final void Function(Note note) onDelete;
   final void Function(int oldIndex, int newIndex) onReorder;
+  final bool isSearching;
 
   @override
   Widget build(BuildContext context) {
+
+    if (notes.isEmpty && isSearching) {
+      return EmptyState(
+        image: 'not_found',
+        title: 'No results found',
+        subtitle: 'Try searching for something else?'
+      );
+    }
+    else if (notes.isEmpty) {
+      return EmptyState(
+        image: 'empty_page',
+        title: 'No notes yet',
+        subtitle: 'Tap create to add your first note!'
+      );
+    }
     return ReorderableListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       itemCount: notes.length,

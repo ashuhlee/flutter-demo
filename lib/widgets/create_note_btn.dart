@@ -17,7 +17,7 @@ class CreateNoteButton extends StatelessWidget {
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
       ),
       icon: Container(
-        padding: const EdgeInsets.all(6),
+        padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           color: const Color(0xFFE9EBFF),
           borderRadius: BorderRadius.circular(30),
@@ -29,7 +29,7 @@ class CreateNoteButton extends StatelessWidget {
       elevation: 0,
 
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(30),
         side: BorderSide(color: ThemeColor.fuchsia.shade100, width: 1.5),
       ),
     );

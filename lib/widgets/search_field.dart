@@ -28,17 +28,17 @@ class NoteSearchField extends StatelessWidget {
         hintStyle: TextStyle(color: Colors.grey.shade500),
         prefixIcon: Container(
           margin: EdgeInsets.only(left: 2),
-          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 11.75),
+          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
           decoration: BoxDecoration(
             color: ThemeColor.fuchsia.shade200,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
+              topLeft: Radius.circular(12),
+              bottomLeft: Radius.circular(12),
             ),
           ),
           child: Icon(
             TablerIcons.search,
-            size: 20,
+            size: 22,
             color: ThemeColor.fuchsia.shade800,
           ),
         ),
@@ -47,31 +47,31 @@ class NoteSearchField extends StatelessWidget {
         fillColor: Color(0xFFFDFCFF),
 
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(
             color: ThemeColor.fuchsia.shade100,
             width: 1.5,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(
             color: ThemeColor.fuchsia.shade100,
             width: 1.5,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(color: ThemeColor.fuchsia.shade400, width: 2),
         ),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(
             color: ThemeColor.fuchsia.shade100,
             width: 1.5,
           ),
         ),
-        contentPadding: EdgeInsets.symmetric(vertical: 4),
+        contentPadding: EdgeInsets.symmetric(vertical: 13),
       ),
     );
   }

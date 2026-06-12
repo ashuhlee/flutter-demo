@@ -10,6 +10,8 @@ import 'package:todo_app/widgets/delete_note_dialog.dart';
 import 'package:todo_app/widgets/note_dialog.dart';
 import 'package:todo_app/widgets/note_list.dart';
 
+import '../widgets/search_field.dart';
+
 class NotePage extends StatefulWidget {
   const NotePage({super.key});
 
@@ -38,7 +40,6 @@ class _NotePageState extends State<NotePage> {
             createdAt: '',
             updatedAt: null,
           );
-
           Navigator.pop(context);
           noteController.clear();
           await database.createNote(newNote);
@@ -106,25 +107,35 @@ class _NotePageState extends State<NotePage> {
     final notes = _filterNotes(_notes);
 
     return Scaffold(
-      appBar: NoteAppBar(
-        noteCount: notes.length,
-        searchController: searchController,
-        onSearchChanged: ((value) {
-          setState(() {});
-        }),
-      ),
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 10, right: 7),
+        padding: const EdgeInsets.only(right: 10),
         child: CreateNoteButton(onPressed: _addNewNote),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
 
-      body: NoteList(
-        notes: notes,
-        onEdit: _updateNote,
-        onDelete: _deleteNote,
-        onReorder: _reorderNotes
-      )
+      body: Column(
+        children: [
+          NoteAppBar(noteCount: notes.length),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+            child: NoteSearchField(
+              controller: searchController,
+              onChanged: (value) {
+                setState(() {});
+              },
+            ),
+          ),
+          Expanded(
+            child: NoteList(
+              notes: notes,
+              isSearching: searchController.text.isNotEmpty,
+              onEdit: _updateNote,
+              onDelete: _deleteNote,
+              onReorder: _reorderNotes,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
