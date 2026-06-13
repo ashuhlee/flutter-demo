@@ -26,9 +26,9 @@ class NoteAppBar extends StatelessWidget {
                 Text(
                   'Recent notes',
                   style: TextStyle(
-                    fontSize: 27,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFB387A4),
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF6D6D80),
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -96,7 +96,7 @@ class _Pill extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
-            Icon(icon, size: 16, color: textColor),
+            Icon(icon, size: 16, color: textColor.withValues(alpha: 0.7)),
             const SizedBox(width: 6),
           ],
           Text(

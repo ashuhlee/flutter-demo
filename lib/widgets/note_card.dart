@@ -46,15 +46,16 @@ class NoteCard extends StatelessWidget {
             title: Text( // note title
               note.content,
               style: TextStyle(
-                color: Color(0xFF363650),
+                color: Color(0xFF4F4F62),
                 fontWeight: FontWeight.w400,
+                fontSize: 16.5,
               ),
             ),
-            subtitle: Row( // date and time
+            subtitle: Row( // date and time + icons
               children: [
                 Icon(
                   wasEdited ? TablerIcons.heart_exclamation : TablerIcons.heart,
-                  size: 14,
+                  size: 15,
                   color: Colors.grey.shade400,
                 ),
                 SizedBox(width: 2),

@@ -113,28 +113,40 @@ class _NotePageState extends State<NotePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
 
-      body: Column(
-        children: [
-          NoteAppBar(noteCount: notes.length),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
-            child: NoteSearchField(
-              controller: searchController,
-              onChanged: (value) {
-                setState(() {});
-              },
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Colors.white.withValues(alpha: 0.6),
+              ThemeColor.fuchsia.shade50,
+              ThemeColor.fuchsia.shade200,
+            ],
+            stops: [0.0, 0.4, 1.0],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,)
+        ),
+        child: Column(
+          children: [
+            NoteAppBar(noteCount: notes.length),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+              child: NoteSearchField(
+                controller: searchController,
+                onChanged: (value) {
+                  setState(() {});
+                },
+              ),
             ),
-          ),
-          Expanded(
-            child: NoteList(
-              notes: notes,
-              isSearching: searchController.text.isNotEmpty,
-              onEdit: _updateNote,
-              onDelete: _deleteNote,
-              onReorder: _reorderNotes,
+            Expanded(
+              child: NoteList(
+                notes: notes,
+                isSearching: searchController.text.isNotEmpty,
+                onEdit: _updateNote,
+                onDelete: _deleteNote,
+                onReorder: _reorderNotes,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
