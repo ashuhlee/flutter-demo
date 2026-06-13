@@ -4,9 +4,9 @@ A demo notes application built with Flutter and Supabase integration, showcasing
 
 ### Preview
 <div align="center">
-  <img height="600" alt="preview image" src="https://github.com/user-attachments/assets/3091642d-f7b2-4768-8040-323c2b4ea265" />
+  <img height="700" alt="preview image" src="https://github.com/user-attachments/assets/3091642d-f7b2-4768-8040-323c2b4ea265" />
   &nbsp;&nbsp;&nbsp;
-  <img height="600" alt="preview gif" src="https://github.com/user-attachments/assets/028ba755-5ff9-4e46-8b1f-9cb85392a8e7" />
+  <img height="700" alt="preview gif" src="https://github.com/user-attachments/assets/5e89cf51-f890-4721-b8c2-512266fb7e16" />
 </div>
 
 ### Requirements
@@ -25,8 +25,8 @@ A demo notes application built with Flutter and Supabase integration, showcasing
 
 2. Create a `.env` file in the project root with Supabase credentials:
 ```
-   URL=your_supabase_project_url
-   PUBLISHABLE_KEY=your_supabase_publishable_key
+  URL=your_supabase_project_url
+  PUBLISHABLE_KEY=your_supabase_publishable_key
 ```
  
 3. Set up a Supabase `notes` table with the following columns:
@@ -38,7 +38,7 @@ A demo notes application built with Flutter and Supabase integration, showcasing
   
 5. Run the app:
 ```bash
-   flutter run
+  flutter run
 ```
  
 ### Project Structure
