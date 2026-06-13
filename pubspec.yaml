@@ -30,7 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.19.0
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.2
   flutter_tabler_icons: ^1.43.0
   change_case: ^2.2.0
   flutter_svg: ^2.0.0
@@ -79,7 +81,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+   - family: Sofia
+     fonts:
+       - asset: assets/fonts/Sofia-Pro-Regular.otf
+       - asset: assets/fonts/Sofia-Pro-Medium.otf
+         weight: 500
+       - asset: assets/fonts/Sofia-Pro-SemiBold.otf
+         weight: 600
+       - asset: assets/fonts/Sofia-Pro-Bold.otf
+         weight: 700
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
